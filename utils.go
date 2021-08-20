@@ -1,7 +1,11 @@
 package pkg
 
-import "fmt"
+import (
+	"math/rand"
 
-func World() {
-	fmt.Println("Hello world !!!")
+	pkgConstans "github.com/amwyygyuge/utils/constant"
+)
+
+func GetRandomUserAgent() string {
+	return pkgConstans.USER_AGENTS[rand.Intn(len(pkgConstans.USER_AGENTS))]
 }
