@@ -8,5 +8,4 @@ import (
 func TestGetProxyIps(t *testing.T) {
 	a, _ := GetProxyIps()
 	fmt.Println(a)
-
 }
