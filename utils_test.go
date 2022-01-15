@@ -6,7 +6,7 @@ import (
 )
 
 func TestGetProxyIps(t *testing.T) {
-	a := GetProxyIps()
-	t.Error("ssss")
+	a, _ := GetProxyIps()
 	fmt.Println(a)
+
 }

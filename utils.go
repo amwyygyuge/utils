@@ -23,12 +23,20 @@ func ZhToUnicode(raw []byte) (string, error) {
 func GetRandomUserAgent() string {
 	return pkgConstans.USER_AGENTS[rand.Intn(len(pkgConstans.USER_AGENTS))]
 }
-func GetProxyIps() pkgConstans.Ips {
-	res, _ := http.Get("https://ip.jiangxianli.com/api/proxy_ips")
+
+func GetProxyIps() ([]string, error) {
+	var ips []string
+	res, err := http.Get("https://ip.jiangxianli.com/api/proxy_ips")
+	if err != nil {
+		return ips, err
+	}
 	result, _ := ioutil.ReadAll(res.Body)
 	res.Body.Close()
 	str, _ := ZhToUnicode(result)
 	var data pkgConstans.Ips
 	json.Unmarshal([]byte(str), &data)
-	return data
+	for _, item := range data.Data.Data {
+		ips = append(ips, item.IP+":"+item.Port)
+	}
+	return ips, nil
 }
